@@ -1,0 +1,25 @@
+
+<h2>Details</h2>
+<ul style="list-style-type:none;">
+      <li class="col m-2 p-4 bg-light shadow-lg " *ngFor="let element of Books">
+        <ul style="list-style-type:none;">
+          <li>
+        <img src="../assets/images/books.jpg" class="col-4 rounded float-center img-fluid" >
+
+        <strong>Book Name : </strong>{{element.name}}<br>
+        <strong>Price : </strong> Rs. {{element.price.toLocaleString()}}<br>
+        <strong>Author : </strong>{{element.author}}<br>
+        <strong>Condition : </strong>{{element.condition}}<br>
+        <strong>Seller : </strong>{{element.seller}}
+      </li>
+      </ul>
+         <!-- <div class="col-4 m-2">
+
+         </div>
+         <div class="col-4 m-2">
+         </div>
+         <div class="col-4 m-2">
+         </div> -->
+
+       </li>
+</ul>

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col"><button class="btn btn-danger m-2" routerLink='../main' >Books</button> </div><!--onclick="backto()"-->
+    <h1 class="col align-middle">Wishlist</h1>
+    <div class="col"><button class="btn btn-info m-2" onclick="clearfunc()">Clear Wishlist</button> </div>
+  </div>
+  <div class="">
+
+
+    <div class="row   m-4 " id="cart-item-list">
+<ul style="list-style-type:none;">
+      <li class="col m-2 p-4 bg-light shadow-lg " *ngFor="let element of Wishlist" id="{{element.id}}">
+
+        <img src="../assets/images/books.jpg" class="col-4 rounded float-center img-thumbnail img-fluid" >
+         {{element.name}}
+         <div class="col-4 m-2">
+           Rs. {{element.price.toLocaleString()}}
+         </div>
+         <button class="col-4 align-left"type="button" (click)="clearsingle($event)">Remove</button>
+         <button class="col-4 aligh-right"type="button" (click)="details($event)">Details</button>
+       </li>
+</ul>
+
+
+
+ </div>
+</div>
+    </div>
