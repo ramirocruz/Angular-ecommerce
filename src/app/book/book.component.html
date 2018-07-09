@@ -1,25 +1,20 @@
 
 <h2>Details</h2>
-<ul style="list-style-type:none;">
-      <li class="col m-2 p-4 bg-light shadow-lg " *ngFor="let element of Books">
-        <ul style="list-style-type:none;">
-          <li>
-        <img src="../assets/images/books.jpg" class="col-4 rounded float-center img-fluid" >
+<ul style="list-style-type:none;" id="{{element.id}}">
+      <li class="col m-2 p-4 bg-light shadow-lg ">
+
+        <img src="../assets/images/books.jpg" class="col-6 m-12 p-12 row-6 rounded float-center img-fluid" >
 
         <strong>Book Name : </strong>{{element.name}}<br>
-        <strong>Price : </strong> Rs. {{element.price.toLocaleString()}}<br>
+        <strong>Price : </strong> Rs. {{element.price}}<br>
         <strong>Author : </strong>{{element.author}}<br>
         <strong>Condition : </strong>{{element.condition}}<br>
         <strong>Seller : </strong>{{element.seller}}
-      </li>
-      </ul>
-         <!-- <div class="col-4 m-2">
 
-         </div>
-         <div class="col-4 m-2">
-         </div>
-         <div class="col-4 m-2">
-         </div> -->
+        <div class="col">
+          <button class=" col-4 btn btn-primary m-2 p-2" (click)="buy($event)">Buy</button>
+          <button class="col-4 btn btn-danger m-2 p-2" (click)="addToWishlist($event)">Add To Wishlist</button>
+        </div>
 
        </li>
 </ul>

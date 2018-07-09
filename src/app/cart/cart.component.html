@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col"><button class="btn btn-danger m-2" routerLink='../main' >Shop</button> </div><!--onclick="backto()"-->
     <h1 class="col align-middle">Cart</h1>
-    <div class="col"><button class="btn btn-info m-2" onclick="clearfunc()">Clear Cart</button> </div>
+    <div class="col"><button class="btn btn-info m-2" (click)="emptyCart()">Clear Cart</button> </div>
   </div>
   <div class="">
 
@@ -11,7 +11,7 @@
 <ul style="list-style-type:none;">
       <li class="col m-2 p-4 bg-light shadow-lg " *ngFor="let cartelement of Cart" id="{{cartelement.id}}">
 
-        <img src="../assets/images/{{cartelement.type}}.jpg" class="col-4 rounded float-center img-thumbnail img-fluid" >
+        <img src="../assets/images/books.jpg" class="col-4 rounded float-center img-thumbnail img-fluid" >
          {{cartelement.name}}
          <div class="col-4 m-2">
            Rs. {{cartelement.price.toLocaleString()}}

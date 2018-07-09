@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthGuard} from'./auth.guard';
-
+import { LoginGuard } from './login.guard';
+import {AuthService} from './auth.service';
+import {DataService} from './data.service';
 import { AppComponent } from './app.component';
 import { MainComponent} from './main/main.component';
 import { CartComponent} from './cart/cart.component';
@@ -23,12 +25,13 @@ const routes: Routes = [
   {
         path: 'cart',
         component:CartComponent,
+        canActivate:[AuthGuard]
 
   },
   {
     path:'auth',
     component:AuthComponent,
-    canActivate:[AuthGuard]
+    canActivate:[LoginGuard]
   },
   {
     path: 'register',
@@ -36,14 +39,16 @@ const routes: Routes = [
   },
   {
     path:'addbook',
-    component:AddbookComponent
+    component:AddbookComponent,
+    canActivate:[AuthGuard]
   },
   {
     path:'wishlist',
-    component:WishlistComponent
+    component:WishlistComponent,
+    canActivate:[AuthGuard]
   },
   {
-    path:'book',
+    path:'details/:id',
     component:BookComponent
   },
   {
@@ -68,7 +73,7 @@ const routes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,AuthService,DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

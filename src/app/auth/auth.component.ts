@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {AuthService} from '../auth.service';
 import {DataService} from '../data.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -11,7 +12,7 @@ import {DataService} from '../data.service';
 export class AuthComponent implements OnInit {
 email:any;
 pass:any;
-  constructor(private auth:AuthService,private dataservice:DataService) { }
+  constructor(private auth:AuthService,private dataservice:DataService,private router:Router) { }
 
   ngOnInit() {
     this.email=document.getElementById('email');
@@ -27,13 +28,12 @@ pass:any;
                                "password":this.pass.value,
                              }}).subscribe(data =>{
                                console.log(data);
-                               if(data[0]==null)
-                               alert("Wrong Password or  Username");
+                               if(data[0]==false)
+                               alert("Wrong Password or  Email");
                                else {
-                                 localStorage.setItem("admin",'1');
-                                 console.log("logged in");
-                                 this.dataservice.isLoggedin().subscribe(
-                                   data => {console.log(data)})
+                               this.auth.setlogin(true);
+                               this.router.navigate(['main']);
+
 
                                }
                              })

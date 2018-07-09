@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col"><button class="btn btn-danger m-2" routerLink='../main' >Books</button> </div><!--onclick="backto()"-->
     <h1 class="col align-middle">Wishlist</h1>
-    <div class="col"><button class="btn btn-info m-2" onclick="clearfunc()">Clear Wishlist</button> </div>
+    <div class="col"><button class="btn btn-info m-2" (click)="emptyWishlist()">Clear Wishlist</button> </div>
   </div>
   <div class="">
 
@@ -12,12 +12,13 @@
       <li class="col m-2 p-4 bg-light shadow-lg " *ngFor="let element of Wishlist" id="{{element.id}}">
 
         <img src="../assets/images/books.jpg" class="col-4 rounded float-center img-thumbnail img-fluid" >
-         {{element.name}}
+         <a routerLink="../details/{{element.id}}"><strong>{{element.name}}</strong></a>
          <div class="col-4 m-2">
            Rs. {{element.price.toLocaleString()}}
          </div>
-         <button class="col-4 align-left"type="button" (click)="clearsingle($event)">Remove</button>
-         <button class="col-4 aligh-right"type="button" (click)="details($event)">Details</button>
+         <!-- <button class="col-4 align-left"type="button" (click)="clearsingle($event)">Remove</button> -->
+         <button class=" col-4 btn btn-primary m-2 p-2" (click)="buy($event)">Buy</button>
+         
        </li>
 </ul>
 

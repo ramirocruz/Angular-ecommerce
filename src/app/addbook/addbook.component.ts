@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {AuthService} from '../auth.service';
-
+import {DataService} from '../data.service';
 @Component({
   selector: 'app-addbook',
   templateUrl: './addbook.component.html',
@@ -9,11 +10,16 @@ import {AuthService} from '../auth.service';
 })
 export class AddbookComponent implements OnInit {
 forms;
-  constructor(private auth:AuthService) { }
+currentuser;
+  constructor(private auth:AuthService,private dataservice:DataService) { }
 
   ngOnInit() {
   this.forms= document.getElementById('contact_form');
-  console.log(this.forms);
+  this.currentuser= this.dataservice.getcurrentuser().subscribe(
+    result => { this.currentuser = result
+    }
+  )
+document.getElementById('success_message').setAttribute('display','block');
   }
   submit(){
     let form=this.forms;
@@ -21,20 +27,26 @@ forms;
           let author=form["author"].value;
           let condition=form["condition"].value;
           let price= +form["price"].value;
-          console.log(name,author,condition,price);
+          let seller= this.currentuser[0].name;
+          let userid = this.currentuser[0].id;
+console.log(seller);
+
     if(this.validate()){
-    console.log("Done");
+
   this.auth.addBooks(
   {'name':name,
   'author':author,
   'condition':condition,
-  'price':price
+  'price':price,
+  'seller':seller,
+  'userid':userid
    }).subscribe( data => {
-console.log(data);
-  });}
-    else{
-  console.log("Haha");
-    }
+     console.log(data);
+  });
+
+
+}
+
   }
 
 

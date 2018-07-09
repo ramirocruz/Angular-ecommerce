@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import {AuthService} from '../auth.service';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-main',
@@ -7,14 +8,35 @@ import { Observable } from 'rxjs';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  // Products = [{ "id": 1, "name": "Pixel", "type": "mobile", "price": 20000,}, { "id": 2, "name": "Linen Jeans", "type": "clothes", "price": 2000}, { "id": 3, "name": "Mixer", "type": "electronic", "price": 1000,}, { "id": 4, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 5, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 6, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 7, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 8, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 9, "name": "Lenovo", "type": "computer", "price": 45000, }, { "id": 10, "name": "Lenovo", "type": "computer", "price": 45000,}];
+
 Products;
-  constructor(private dataservice:DataService) {
+currentuser;
+  constructor(private dataservice:DataService,private auth:AuthService) {
 
 }
   ngOnInit() {
     this.dataservice.getData().subscribe( data =>{ this.Products = data});
-    this.dataservice.getcurrentuser().subscribe( data => {console.log(data) });
+    this.dataservice.getcurrentuser().subscribe( user => {this.currentuser=user});
   }
+  buy(event){
+    let id=event.currentTarget.parentNode.parentNode.parentNode.id;
+    this.dataservice.addToCart({productid:id,userid:this.currentuser[0].id}).subscribe(
+      result => {
+        console.log(result);
+      }
+    )
+  }
+  addToWishlist(event){
+    let id=event.currentTarget.parentNode.parentNode.parentNode.id;
+    this.dataservice.addToWishlist({productid:id,userid:this.currentuser[0].id}).subscribe(
+      result => {
+        console.log(result);
+      }
+    )
+  }
+logout(){
+  this.auth.setlogin(false);
+  this.auth.logOut().subscribe(result => { alert("logged out")});
+}
 
 }

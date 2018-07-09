@@ -1,16 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-
+import {DataService} from '../data.service';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 @Component({
   selector: 'app-wishlist',
   templateUrl: './wishlist.component.html',
   styleUrls: ['./wishlist.component.css']
 })
 export class WishlistComponent implements OnInit {
-  Wishlist = [{ "id": 1, "name": "Pixel", "type": "mobile", "price": 20000,}, { "id": 2, "name": "Linen Jeans", "type": "clothes", "price": 2000}, { "id": 3, "name": "Mixer", "type": "electronic", "price": 1000,}, { "id": 4, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 5, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 6, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 7, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 8, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 9, "name": "Lenovo", "type": "computer", "price": 45000, }, { "id": 10, "name": "Lenovo", "type": "computer", "price": 45000,}];
-
-  constructor() { }
+  Wishlist;
+  products;
+  currentuser;
+  constructor(private dataservice:DataService,private router:Router) { }
 
   ngOnInit() {
+    this.dataservice.getcurrentuser().subscribe( user => {this.currentuser = user[0].id
+
+    this.dataservice.getWishlist(this.currentuser).subscribe( product => {this.products = product
+      let pid=[];
+       for(product of this.products)
+       {
+        pid.push(product.productid);
+       }
+         if(pid.length != 0){
+           
+    this.dataservice.getDataofId(pid).subscribe( result => { this.Wishlist = result
+
+
+    });}
+    });
+    });
+
+
+  }
+  emptyWishlist(){
+    this.dataservice.deleteWishlist(this.currentuser).subscribe( res => {
+      if(res)
+      alert("wishlist empty");
+    });
+    this.Wishlist=[];
   }
 
 }

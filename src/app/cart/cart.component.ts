@@ -1,18 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-
+import {DataService} from '../data.service';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  Cart = [{ "id": 1, "name": "Pixel", "type": "mobile", "price": 20000,}, { "id": 2, "name": "Linen Jeans", "type": "clothes", "price": 2000}, { "id": 3, "name": "Mixer", "type": "electronic", "price": 1000,}, { "id": 4, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 5, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 6, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 7, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 8, "name": "Lenovo", "type": "computer", "price": 45000,}, { "id": 9, "name": "Lenovo", "type": "computer", "price": 45000, }, { "id": 10, "name": "Lenovo", "type": "computer", "price": 45000,}];
+  Cart;
+  userid;
+  productid;
+  constructor(private dataservice:DataService,private router:Router) {
 
-  constructor() {
-    // this.
 }
   ngOnInit() {
 
+  this.dataservice.getcurrentuser().subscribe( user => {this.userid = user[0].id
+
+  this.dataservice.getCart(this.userid).subscribe( product => {this.productid = product
+    let pid=[];
+     for(product of this.productid)
+     {
+      pid.push(product.productid);
+     }
+  if(pid.length!=0){
+
+
+  this.dataservice.getDataofId(pid).subscribe( result => { this.Cart = result
+
+
+  });}
+  });
+  });
+
+
+  }
+
+  emptyCart(){
+    this.dataservice.deleteCart(this.userid).subscribe( res => {
+      if(res)
+      alert("cart empty");
+    });
+    this.Cart=[];
   }
 
 }
