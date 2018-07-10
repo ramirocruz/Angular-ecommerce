@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -8,12 +9,13 @@ import {AuthService} from '../auth.service';
 })
 export class RegisterComponent implements OnInit {
 forms;
-errors=[];
-  constructor(private auth:AuthService) { }
+elem;
+
+  constructor(private auth:AuthService,private router:Router) { }
 
   ngOnInit() {
 this.forms= document.getElementById('contact_form');
-console.log(this.forms);
+this.elem=document.getElementById('success_message');
   }
   submit(){
     let form=this.forms;
@@ -27,7 +29,7 @@ console.log(this.forms);
           let college=form["college"].value;
           // let image=form["image"].value;
     if(this.formvalidate()){
-    console.log("Done");
+
     this.auth.registerUser({
       'status':2,
       'item':{
@@ -37,7 +39,7 @@ console.log(this.forms);
       if(data[0])
       alert('email already exits');
       else
-      {
+      {this.elem.style.display="block";
         this.auth.registerUser({'status':1,
          'item':
          {'name':name,
@@ -48,14 +50,14 @@ console.log(this.forms);
         'address':address,
         'college':college}
           }).subscribe( data => {
-       console.log(data);
+       this.router.navigate(['main']);
         });
       }
     })
+ }else{
+   this.elem.parentNode.parentNode.reset();
  }
-    else{
-console.log("Haha");
-    }
+
   }
 
 

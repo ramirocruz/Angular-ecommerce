@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {AuthService} from '../auth.service';
 import {DataService} from '../data.service';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-addbook',
   templateUrl: './addbook.component.html',
@@ -11,7 +12,8 @@ import {DataService} from '../data.service';
 export class AddbookComponent implements OnInit {
 forms;
 currentuser;
-  constructor(private auth:AuthService,private dataservice:DataService) { }
+elem;
+  constructor(private auth:AuthService,private dataservice:DataService,private router:Router) { }
 
   ngOnInit() {
   this.forms= document.getElementById('contact_form');
@@ -19,7 +21,8 @@ currentuser;
     result => { this.currentuser = result
     }
   )
-document.getElementById('success_message').setAttribute('display','block');
+  this.elem=document.getElementById('success_message');
+
   }
   submit(){
     let form=this.forms;
@@ -29,10 +32,10 @@ document.getElementById('success_message').setAttribute('display','block');
           let price= +form["price"].value;
           let seller= this.currentuser[0].name;
           let userid = this.currentuser[0].id;
-console.log(seller);
+
 
     if(this.validate()){
-
+this.elem.style.display="block";
   this.auth.addBooks(
   {'name':name,
   'author':author,
@@ -41,9 +44,19 @@ console.log(seller);
   'seller':seller,
   'userid':userid
    }).subscribe( data => {
-     console.log(data);
-  });
+     if(data)
+     {
+       if(!confirm('Want to add more ?'))
+            this.router.navigate(['main']);
+            else{
+              this.elem.parentNode.parentNode.reset();
+              this.elem.style.display="none";
+               }
+          }
+     else
+     alert("Something went wrong....");
 
+  });
 
 }
 

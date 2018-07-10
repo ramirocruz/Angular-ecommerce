@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import {AuthService} from '../auth.service';
 import { Observable } from 'rxjs';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -11,7 +12,7 @@ export class MainComponent implements OnInit {
 
 Products;
 currentuser;
-  constructor(private dataservice:DataService,private auth:AuthService) {
+  constructor(private dataservice:DataService,private auth:AuthService,private router:Router) {
 
 }
   ngOnInit() {
@@ -19,24 +20,40 @@ currentuser;
     this.dataservice.getcurrentuser().subscribe( user => {this.currentuser=user});
   }
   buy(event){
+    
+    if(this.currentuser){
     let id=event.currentTarget.parentNode.parentNode.parentNode.id;
     this.dataservice.addToCart({productid:id,userid:this.currentuser[0].id}).subscribe(
-      result => {
-        console.log(result);
+      result => {if(result)
+        { alert("Item added to Cart");
+         this.router.navigate(['cart']);
+       }else{
+         alert("Item already in cart");
+       }
+
       }
     )
   }
+  else{
+    this.router.navigate(['auth']);
+  }
+}
   addToWishlist(event){
+    if(this.currentuser){
     let id=event.currentTarget.parentNode.parentNode.parentNode.id;
     this.dataservice.addToWishlist({productid:id,userid:this.currentuser[0].id}).subscribe(
-      result => {
-        console.log(result);
+      result => {if(result)
+        { alert("Item added to Wishlist");
+         this.router.navigate(['wishlist']);
+       }else{
+         alert("Something went wrong");
+       }
+
       }
     )
-  }
-logout(){
-  this.auth.setlogin(false);
-  this.auth.logOut().subscribe(result => { alert("logged out")});
-}
+  }else{
+    this.router.navigate(['auth']);
+  }}
+
 
 }

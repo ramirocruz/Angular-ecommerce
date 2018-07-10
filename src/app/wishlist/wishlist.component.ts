@@ -23,7 +23,7 @@ export class WishlistComponent implements OnInit {
         pid.push(product.productid);
        }
          if(pid.length != 0){
-           
+
     this.dataservice.getDataofId(pid).subscribe( result => { this.Wishlist = result
 
 
@@ -40,5 +40,24 @@ export class WishlistComponent implements OnInit {
     });
     this.Wishlist=[];
   }
+  buy(event){
+
+    if(this.currentuser){
+    let id=event.currentTarget.parentNode.id;
+    this.dataservice.addToCart({productid:id,userid:this.currentuser}).subscribe(
+      result => {if(result)
+        { alert("Item added to Cart");
+         this.router.navigate(['cart']);
+       }else{
+         alert("Item already in Cart");
+       }
+
+      }
+    )
+  }
+  else{
+    this.router.navigate(['auth']);
+  }
+}
 
 }

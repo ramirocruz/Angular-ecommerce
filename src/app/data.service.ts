@@ -37,4 +37,13 @@ export class DataService {
   addToWishlist(data){
     return this.http.post('api/wishlist',data);
   }
+  addToMessage(data){
+    return this.http.post('api/message',data);
+  }
+  getMessage(){
+    return this.http.get('api/message');
+  }
+  deleteMessages(){
+    return this.http.get('api/message/delete');
+  }
 }

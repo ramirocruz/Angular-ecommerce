@@ -17,8 +17,7 @@ pass:any;
   ngOnInit() {
     this.email=document.getElementById('email');
     this.pass=document.getElementById('pwd');
-    console.log(this.email);
-    console.log(this.pass);
+
   }
   login() {
 
@@ -27,7 +26,7 @@ pass:any;
                                "email":this.email.value,
                                "password":this.pass.value,
                              }}).subscribe(data =>{
-                               console.log(data);
+                               
                                if(data[0]==false)
                                alert("Wrong Password or  Email");
                                else {

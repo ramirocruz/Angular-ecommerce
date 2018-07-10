@@ -1,18 +1,18 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
   <div class="row">
-    <div class="col"><button class="btn btn-primary" (click)="logout()">Logout</button></div>
     <div class="col"><button class="btn btn-danger" routerLink="../auth">Login/Register</button></div>
-    <h1 class="col align-middle">Books</h1>
     <div class="col"><a routerLink="../cart"><button class="btn btn-danger">Cart</button></a> </div>
+    <h1 class="col align-middle">Books</h1>
     <div class="col"><a routerLink="../addbook"><button class="btn btn-default">Sell your books!</button></a> </div>
     <div class="col"><a routerLink="../wishlist"><button class="btn btn-primary">Wishlist</button></a> </div>
+    <div class="col"><a routerLink="../message"><i class="fas fa-bell"></i></a> </div>
   </div>
   <div class="">
 <!-- <ul style="list-style-type:none;padding:0;margin:0;"> -->
 <!-- <ul> -->
 
-
+<!-- <li *ngFor="let person of people | orderBy : ['-lastName', 'age']">{{person.firstName}} {{person.lastName}}, {{person.age}}</li> -->
     <div class="row   m-4 " id="item-list" >
       <!-- <div *ngFor="let item of Products"> -->
       <div class="col-4 card m-4 p-4 text-center bg-info shadow-lg" *ngFor="let item of Products" id="{{item.id}}">

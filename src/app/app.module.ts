@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { AddbookComponent } from './addbook/addbook.component';
 import { BookComponent } from './book/book.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { MessageComponent } from './message/message.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,11 @@ const routes: Routes = [
     component:BookComponent
   },
   {
+    path:'message',
+    component:MessageComponent,
+    canActivate:[AuthGuard]
+  }
+  {
     path: '',
     redirectTo: 'main',
     pathMatch: 'full'
@@ -67,6 +73,7 @@ const routes: Routes = [
     AddbookComponent,
     BookComponent,
     WishlistComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,

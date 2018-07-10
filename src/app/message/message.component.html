@@ -1,0 +1,13 @@
+<div class="row">
+
+  <h1 class="col align-middle">Messages</h1>
+  <div class="col"><button class="btn btn-info m-2" (click)="emptyMessage()">Clear Message</button> </div>
+</div>
+
+<ul>
+  <li *ngFor="let message of Messages">
+    {{ message.sender }}
+
+    <p>{{ message.product }} at {{message.createdAt.toLocaleString()}}</p> 
+  </li>
+</ul>
