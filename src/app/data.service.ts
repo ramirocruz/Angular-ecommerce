@@ -20,10 +20,10 @@ export class DataService {
     return this.http.post('/api/listings/var',userids);
   }
   getCart(userid:string){
-    return this.http.get('api/cart/'+userid);
+    return this.http.get<any>('api/cart/'+userid);
   }
   getWishlist(userid:string){
-    return this.http.get('api/wishlist/'+userid);
+    return this.http.get<any>('api/wishlist/'+userid);
   }
   deleteCart(userid:string){
     return this.http.get('api/cart/delete/'+userid);
@@ -41,7 +41,7 @@ export class DataService {
     return this.http.post('api/message',data);
   }
   getMessage(){
-    return this.http.get('api/message');
+    return this.http.get<Array<any>>('api/message');
   }
   deleteMessages(){
     return this.http.get('api/message/delete');

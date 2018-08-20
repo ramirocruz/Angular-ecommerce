@@ -56,7 +56,7 @@ const routes: Routes = [
     path:'message',
     component:MessageComponent,
     canActivate:[AuthGuard]
-  }
+  },
   {
     path: '',
     redirectTo: 'main',

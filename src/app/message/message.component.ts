@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
-Messages:Array<Object>;
+Messages:Array<any>;
  // currentuser;
   constructor(private dataservice:DataService,private router:Router) { }
 
@@ -18,8 +18,8 @@ Messages:Array<Object>;
     this.dataservice.getMessage().subscribe( result => {this.Messages=result
 
       if(result){
-     this.Messages.sort(function (a:Object,b:Object) {
-       return (b.createdAt > a.createdAt)
+     this.Messages.sort(function (a,b) {
+       return <any>(b.createdAt > a.createdAt)
      })}else{
        alert("Messages Empty");
      }
