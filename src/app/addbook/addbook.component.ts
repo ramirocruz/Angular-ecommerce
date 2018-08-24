@@ -13,6 +13,7 @@ export class AddbookComponent implements OnInit {
 forms;
 currentuser;
 elem;
+file;
   constructor(private auth:AuthService,private dataservice:DataService,private router:Router) { }
 
   ngOnInit() {
@@ -24,26 +25,31 @@ elem;
   this.elem=document.getElementById('success_message');
 
   }
+  uploadfile(event){
+    this.file= event.target.files[0];
+  
+  }
   submit(){
     let form=this.forms;
           let name = form["name"].value;
           let author=form["author"].value;
           let condition=form["condition"].value;
-          let price= +form["price"].value;
+          let price= form["price"].value;
+          let image=this.file;
           let seller= this.currentuser[0].name;
           let userid = this.currentuser[0].id;
-
-
+          console.log(image);
+  let newform= new FormData();
+  newform.append('name',name);
+  newform.append('author',author);
+  newform.append('image',this.file,this.file.name);
+  newform.append('seller',seller);
+  newform.append('price',price);
+  newform.append('condition',condition);
+  newform.append('userId',userid);
     if(this.validate()){
 this.elem.style.display="block";
-  this.auth.addBooks(
-  {'name':name,
-  'author':author,
-  'condition':condition,
-  'price':price,
-  'seller':seller,
-  'userid':userid
-   }).subscribe( data => {
+  this.auth.addBooks(newform).subscribe( data => {
      if(data)
      {
        if(!confirm('Want to add more ?'))
@@ -71,7 +77,7 @@ this.elem.style.display="block";
     let author=form["author"].value;
     let condition=form["condition"].value;
     let price= +form["price"].value;
-          // let image=form["image"].value;
+    let image=form["image"].value;
 
         //console.log(form['image']);
 
@@ -92,10 +98,10 @@ this.elem.style.display="block";
           return false;
         }
 
-        // if(image==""){
-        //   alert("Please select an image");
-        //   return false;
-        // }
+        if(image==""){
+          alert("Please select an image");
+          return false;
+        }
         return true;
       }
 

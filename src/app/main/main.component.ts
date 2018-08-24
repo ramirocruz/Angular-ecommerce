@@ -16,7 +16,7 @@ currentuser;
 
 }
   ngOnInit() {
-    this.dataservice.getData().subscribe( data =>{ this.Products = data});
+    this.dataservice.getData().subscribe( data =>{ this.Products = data; console.log(data)});
     this.dataservice.getcurrentuser().subscribe( user => {this.currentuser=user});
   }
   buy(event){

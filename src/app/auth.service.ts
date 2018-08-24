@@ -13,7 +13,7 @@ private loggedinstatus=false;
     console.log(formdata);
     return this.http.post('/api/users',formdata);
   }
-  addBooks(bookdata){
+  addBooks(bookdata:FormData){
     return this.http.post('/api/listings',bookdata);
   }
   setlogin(status:boolean){

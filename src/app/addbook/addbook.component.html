@@ -1,6 +1,6 @@
 <div class="container">
 
-    <form class="well form-horizontal" method="post" name="myForm" id="contact_form" enctype="application/x-www-form-urlencoded">
+    <form class="well form-horizontal" method="post" name="myForm" id="contact_form" enctype="multipart/form-data">
 <fieldset>
 
 <!-- Form Name -->
@@ -65,15 +65,15 @@
 
 
 <!-- Image input -->
-<!-- <div class="form-group">
+<div class="form-group">
   <label class="col-md-4 control-label">Image</label>
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-  <input name="image" type="file" accept="image/jpeg, image/png " class="form-control">
+  <input name="image" (change)="uploadfile($event)" type="file" accept="image/jpeg, image/png " class="form-control">
     </div>
   </div>
-</div> -->
+</div>
 
 
 <!-- Success message -->
