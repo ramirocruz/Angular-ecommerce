@@ -1,4 +1,9 @@
-<div class="col-3"><button class="btn btn-primary mx-4 my-1 " (click)="logout()">Logout</button>
+<div ><button class="btn btn-primary mx-4 my-1 " (click)="logout()">Logout</button>
   <button class="btn btn-danger mx-4  my-1" routerLink="main">Home</button>
+  <h5 *ngIf="currentuser; else other_content" style="text-align:right;padding-right:60px;margin-top:-40px;padding-bottom:20px;"><b>{{currentuser[0].name}}</b></h5>
+  <ng-template #other_content>
+    <h5 style="text-align:right;padding-right:60px;margin-top:-40px;padding-bottom:20px;"><b>Not Logged In</b></h5>
+  </ng-template>
 </div>
+ 
 <router-outlet></router-outlet>

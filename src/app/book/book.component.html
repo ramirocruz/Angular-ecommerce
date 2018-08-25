@@ -3,7 +3,7 @@
 <ul style="list-style-type:none;" id="{{element.id}}">
       <li class="col m-2 p-4 bg-light shadow-lg ">
 
-        <img src="../assets/images/books.jpg" class="col-6 m-12 p-12 row-6 rounded float-center img-fluid" >
+        <img src="api/{{element.image}}" class="col-6 m-12 p-12 row-6 rounded float-center img-fluid" >
 
         <strong>Book Name : </strong>{{element.name}}<br>
         <strong>Price : </strong> Rs. {{element.price}}<br>
@@ -11,10 +11,15 @@
         <strong>Condition : </strong>{{element.condition}}<br>
         <strong>Seller : </strong>{{element.seller}}
 
-        <div class="col">
-          <button class=" col-4 btn btn-primary m-2 p-2" (click)="buy($event)">Buy</button>
-          <button class="col-4 btn btn-danger m-2 p-2" (click)="addToWishlist($event)">Add To Wishlist</button>
+        <div class="col" *ngIf="currentuser; else other_content" >
+          <button *ngIf="element.userId != currentuser[0].id" class=" col-4 btn btn-primary m-2 p-2" (click)="buy($event)">Buy</button>
+          <button *ngIf="element.userId != currentuser[0].id" class="col-4 btn btn-danger m-2 p-2" (click)="addToWishlist($event)">Add To Wishlist</button>
         </div>
-
+        <ng-template #other_content>
+        <div class="col" >
+            <button  class=" col-4 btn btn-primary m-2 p-2" (click)="buy($event)">Buy</button>
+            <button  class="col-4 btn btn-danger m-2 p-2" (click)="addToWishlist($event)">Add To Wishlist</button>
+          </div>
+        </ng-template>
        </li>
 </ul>

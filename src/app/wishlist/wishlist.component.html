@@ -11,7 +11,7 @@
 <ul style="list-style-type:none;">
       <li class="col m-2 p-4 bg-light shadow-lg " *ngFor="let element of Wishlist" id="{{element.id}}">
 
-        <img src="../assets/images/books.jpg" class="col-4 rounded float-center img-thumbnail img-fluid" >
+        <img src="api/{{element.image}}" class="col-4 rounded float-center img-thumbnail img-fluid" >
          <a routerLink="../details/{{element.id}}"><strong>{{element.name}}</strong></a>
          <div class="col-4 m-2">
            Rs. {{element.price.toLocaleString()}}

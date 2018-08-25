@@ -31,7 +31,7 @@ pass:any;
                                alert("Wrong Password or  Email");
                                else {
                                this.auth.setlogin(true);
-                               this.router.navigate(['main']);
+                               window.location.href="/";
 
 
                                }

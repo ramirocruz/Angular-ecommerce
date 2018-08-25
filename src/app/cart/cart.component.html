@@ -11,7 +11,7 @@
 <ul style="list-style-type:none;">
       <li class="col m-2 p-4 bg-light shadow-lg " *ngFor="let cartelement of Cart" id="{{cartelement.id}}" >
 
-        <img src="../assets/images/books.jpg" class="col-4 rounded float-center img-thumbnail img-fluid" >
+        <img src="api/{{cartelement.image}}" class="col-4 rounded float-center img-thumbnail img-fluid" >
          <a routerLink="../details/{{cartelement.id}}"><strong>{{cartelement.name}}</strong></a>
          <div class="col-4 m-2">
            Rs. {{cartelement.price.toLocaleString()}}

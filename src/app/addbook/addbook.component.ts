@@ -23,9 +23,9 @@ file;
     }
   )
   this.elem=document.getElementById('success_message');
-
+  
   }
-  uploadfile(event){
+  uploadfile(event){console.log(this.currentuser[0]);
     this.file= event.target.files[0];
   
   }
@@ -38,7 +38,7 @@ file;
           let image=this.file;
           let seller= this.currentuser[0].name;
           let userid = this.currentuser[0].id;
-          console.log(image);
+          
   let newform= new FormData();
   newform.append('name',name);
   newform.append('author',author);
@@ -47,8 +47,9 @@ file;
   newform.append('price',price);
   newform.append('condition',condition);
   newform.append('userId',userid);
+  
     if(this.validate()){
-this.elem.style.display="block";
+this.elem.style.display="block";console.log(userid);
   this.auth.addBooks(newform).subscribe( data => {
      if(data)
      {
